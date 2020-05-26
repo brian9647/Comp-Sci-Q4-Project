@@ -1,56 +1,112 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.applet.Applet;
 
-public class driver {
+public class driver extends JPanel implements ActionListener, KeyListener, MouseListener, MouseMotionListener{
 
-	public static void main(String[] args) {
 			//size of jframe
 			int sw 	= 1700; //width
 			int sh 	= 950; //height
-			//size of map
-			int mw = 4000; 
-			int mh = 4000;
 	
 			public void paint(Graphics g) {
 				super.paintComponent(g);
-				g.drawOval(ball.get(x), ball.get(y), ball.get(width), ball.get(width));
+				
+		//		g.drawOval(getX(), (getY()), getWidth(), getWidth());
 				
 	}
-			public void update() {
+			
+//			public void update() {
+//				
+
+
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				// TODO Auto-generated method stub
 				
-			}
-			public static void keyPressed() {
-				/*
-				 * if(e.getKeyCode()==40){ //up arrow pVy=-5; }else if(e.getKeyCode()==38){
-				 * //down arrow pVy=5; } if(e.getKeyCode()==39){ //left key pVx=-5; }else
-				 * if(e.getKeyCode()==37){ //right key pVx=5; }
-				 */
-				if (e.getKeyCode() == 32) { // press space to halve the size
-					w = w / 2;
-				}
 			}
 
 			@Override
-			public void keyReleased() {
+			public void mouseMoved(MouseEvent e) {
 				// TODO Auto-generated method stub
 				
-				  if(e.getKeyCode()==40){ //up key pVy=0; }else if(e.getKeyCode()==38){ //down
-				  key pVy=0; } if(e.getKeyCode()==39){ //left key pVx=0; }else
-				 if(e.getKeyCode()==37){ //right key pVx=0; }
-				 
-				if (e.getKeyCode() == 32) { // release space to stop halving
-					
-				}
 			}
-				  }
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			public static void main(String[] arg) {
+			
+			public driver() {
+				JFrame f = new JFrame();
+				f.setTitle("Ball Breaker");
+				f.setSize(sw, sh);
+				f.setBackground(Color.BLACK);
+				f.setResizable(false);
+				f.addKeyListener(this);
+				f.addMouseMotionListener(this);
 			}
 	}
 }
+
