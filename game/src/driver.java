@@ -34,7 +34,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class driver extends JPanel implements ActionListener, KeyListener, MouseListener, MouseMotionListener {
+public class driver extends JPanel implements ActionListener, KeyListener {
 	/**
 	 * 
 	 */
@@ -43,33 +43,28 @@ public class driver extends JPanel implements ActionListener, KeyListener, Mouse
 	int sw = 500; // width of screen
 	int sh = 700; // height of screen
 	Brick[][] bricks = new Brick[5][6];
-	Slider Slider = new Slider(15, 90, sw/2 -50, sh-100);
-	ball ball = new ball(200, 500, 15, 15);
+	Slider Slider = new Slider(15, 90, sw/2 -50, sh-100); //instantiating a new slider
+	ball ball = new ball(200, 500, 15, 15); //instantiating a new ball
 
 //	public void brickBuilder() {
 //		for (int i = 0; i < 5; i++) {
 //			for (int j = 0; j < 6; j++) {
 //				bricks[i][j] = new Brick(30, 60, 60 + 61 * j, 200 + 31 * i);
 //			}
-//		} // setting the hitboxes for all the rectangles
+//		} // setting the hit boxes for all the rectangles
 //	} this will move to the driver at line 143 
 
 	public void paint(Graphics g) {
-		// super.paintComponent(g);
 		// paint the player
 		g.setColor(Color.BLACK);
 
-		// paint ball
+		//paint ball
 		g.fillOval(ball.getH(), ball.getW(), ball.getX(), ball.getY());
 
-		// paint Slider
+		//paint Slider
 		g.drawRect(Slider.getX(), Slider.getY(), Slider.getW(), Slider.getH()); // making the paddle
 
-//		for (int i = 0; i < 5; i++) {
-//			for (int j = 0; j < 6; j++) {
-//				g.fillRect(60 + 61 * j, 200 + 31 * i, 60, 30);
-//			}
-//		} // drawing all of the rectangles
+		//painting the bricks
 		for (int r = 0; r < bricks.length; r++) {
 			for (int c = 0; c < bricks[0].length; c++) {
 				if (bricks[r][c].isDestroyed() == false) {
@@ -87,39 +82,40 @@ public class driver extends JPanel implements ActionListener, KeyListener, Mouse
 		ball.move();
 		repaint();
 
-// right
+// ball bounce
 		if (ball.getH() == 500 - ball.getY()) {
 			ball.setVx(ball.getVx() * -1);
 		}
-// top
+// right
 		if (ball.getW() == 0) {
 			ball.setVy(ball.getVy() * -1);
 		}
-// left
+// top
 		if (ball.getH() == 0) {
 			ball.setVx(ball.getVx() * -1);
 		}
-// bottom
+// left
 		if (ball.getW() == 680 - ball.getY()) {
 			ball.setVy(ball.getVy() * -1);
 			ball.setH(Slider.getX() + (Slider.getW() / 2));
 			ball.setW(Slider.getY() - ball.getY() - 5);
 		}
-// Slider
+// bottom^
+// below is collision w Slider
 		if (ball.getW() >= Slider.getY() - ball.getY() && ball.getH() > Slider.getX()
 				&& ball.getH() < Slider.getX() + Slider.getW()) {
 			ball.setVy(ball.getVy() * -1);
 		}
 
-// Slider left boundary
+// Slider left 
 		if (Slider.getX() <= 0) {
 			Slider.setX(10);
 		}
-// Slider right boundary
+// Slider right 
 		if (Slider.getX() + Slider.getW() >= sw) {
 			Slider.setX(sw - Slider.getW()-1);
 		}
-
+//"destroying the bricks" by moving them off screen when a collision happens
 		for (int r = 0; r < bricks.length; r++) {
 			for (int c = 0; c < bricks[0].length; c++) {
 				// bottom of brick
@@ -155,9 +151,8 @@ public class driver extends JPanel implements ActionListener, KeyListener, Mouse
 		f.setBackground(Color.WHITE);
 		f.setResizable(false);
 		f.addKeyListener(this);
-		f.addMouseMotionListener(this);
 
-	
+//creates the hit boxes for the bricks	
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 6; j++) {
 				bricks[i][j] = new Brick(30, 60, 60 + 61 * j, 200 + 31 * i);
@@ -183,7 +178,7 @@ public class driver extends JPanel implements ActionListener, KeyListener, Mouse
 		if (e.getKeyCode() == 39) {
 			Slider.move(Slider.getVx());
 		}
-		
+		//controls for the slider
 	}
 
 	@Override
@@ -201,55 +196,5 @@ public class driver extends JPanel implements ActionListener, KeyListener, Mouse
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		// System.out.println(e.getX());
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-		// velocity
-
-		// int pVx = 0;
-		// int pVy = 0;
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent arg0) {
-		/*
-		 * System.out.println(arg0.getX()+" : "+ arg0.getY());
-		 * System.out.println(pX+" : "+pY);
-		 * 
-		 * //based on where they are clicking, figure out how to set the velocity var
-		 * //so it moves in that direction pVx = arg0.getX()-pX; //suggestion #1 pVy =
-		 * arg0.getY()-pY;
-		 */
-
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 	}
 }
